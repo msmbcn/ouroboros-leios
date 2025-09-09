@@ -1,251 +1,156 @@
-# Ouroboros Leios
+# Roadmap
 
-This repository is home of the _Leios R&D project_ whose purpose is to define a specification of the Ouroboros Leios protocol.
+This document lays out the vision, mission, strategy and key objectives of the
+Leios consensus upgrade for Cardano. It outlines _why_ we are doing this, _how_
+we aim to succeed and _what_ we plan to do.
 
-This project aims to address the challenges outlined in [CPS-0018](https://github.com/cardano-foundation/CIPs/blob/master/CPS-0018/README.md), which focuses on improving transaction throughput in the Cardano network.
+## Vision & Mission
 
-> [!CAUTION]
-> This project is in its very early stage and is mostly
-> experimental and exploratory. All contributions and feedbacks are
-> welcome. No warranties of any kind about the current or future
-> features of Cardano are to be expected, implicitly and explicitly.
+### Vision
 
-## Getting started
+Leios supports Cardano’s vision to be recognized as the _best-in-class_ blockchain, renowned for performance, reliability, and scalability.
 
-Checkout [CONTRIBUTING.md](CONTRIBUTING.md) document for possible contributions and communication channels
+### Mission
 
-More documentation about Leios can be found in the [web site](https://leios.cardano-scaling.org).
+Our mission is to drive **greater adoption** of the Cardano network by building a blockchain that is:
 
-## Repository Structure
+- *Scalable and reliable*, enabling innovation and sustainable growth for developers, businesses, and communities.
 
-- [Logbook](Logbook.md) contains a detailed account of
-  problems,successes, failures, ideas, references and is intended as a
-  tool to help the team members stay in sync. It's updated frequently
-  with notes about the day-to-day work, meetings, ideas, etc.
-- [data](data) contains common input files, schemas, and default configurations used by both simulations
-- [deltaQ](deltaQ) contains network quality analysis tools and measurements
-- [simulation](simulation) contains experimental Haskell code to simulate the Leios protocol, including built-in visualization capabilities
-- [sim-rs](sim-rs) contains experimental Rust code to simulate the Leios protocol
-- [ui](ui) contains the web-based visualization tool for the Rust simulation traces
-- [site](site) contains the sources of the aforementioned web site
+- *Economically sustainable*, ensuring long-term viability and trust, so that projects choose Cardano as the natural home for decentralized applications and enterprise solutions.
+
+This mission positions Leios as the engine powering Cardano’s global impact.
+
+### Strategy  
+
+To fulfil our mission, Leios will pursue a strategy built on three pillars:  
+
+- **Technical leadership** 
+
+  We will continuously advance Cardano’s core protocol and supporting infrastructure to deliver world-class performance. This means investing in innovations that raise transaction throughput, reduce latency, and strengthen network resilience. By setting the technical benchmark in both research and implementation, Leios will ensure Cardano remains at the forefront of blockchain platforms.  
+
+- **Market repositioning**  
+
+  Beyond technical progress, we will reposition Cardano in the marketplace as a blockchain capable of handling the most demanding use cases. By publishing transparent benchmarks, compelling visualizations, and a clear roadmap of improvements, we can shift perceptions about scalability and reliability. This narrative will attract developers, businesses, and enterprises looking for a secure and future-proof platform.  
+
+- **Sustainable decentralization**  
+
+  Scaling the network must not come at the cost of centralization. Our strategy ensures throughput grows while hardware requirements remain reasonable, so that Stake Pool Operators (SPOs) can remain profitable and engaged. By keeping operational costs sustainable _relative_ to on-chain revenues, we preserve one of Cardano’s greatest strengths—its unmatched decentralization. A healthy, diverse SPO ecosystem guarantees resilience, fairness, and long-term trust.
+
+### Principles  
+
+These are the guiding principles we aim to uphold while executing our strategy, ensuring that our actions align with both our mission and the expectations of the Cardano community.  
+
+- **Validate early**  
+
+  Because Leios is pioneering novel work, it is essential that ideas and technical approaches are tested and validated as early as possible. This reduces risk, encourages experimentation, and ensures that what we build is not only theoretically sound but also practically viable. Early validation allows the community and stakeholders to give feedback before changes become costly or disruptive, and gives us the opportunity to validate assumptions as early as possible in case the design needs to be adjusted, underlying architectures revised, or implementations adapted.  
 
 
-## Simulations
+- **Continuously deliver**  
 
-Both the Haskell and Rust simulations read in a network topology file that defines the nodes and their connections, along with a configuration file that controls various protocol parameters. The simulations then produce trace outputs that can be visualized to analyze the protocol's behavior. The Haskell simulation includes built-in visualization capabilities, while the Rust simulation generates JSONL traces that can be visualized using the web UI in the `ui` directory.
+  Progress must be visible and tangible. By continuously delivering value to the community—whether through incremental improvements, new features, marketing content, or learning materials as Leios develops—we build trust and momentum. Frequent delivery demonstrates accountability, keeps developers and the community engaged, and ensures Cardano evolves in step with real user needs.  
 
-### Configuration Parameters
 
-The Leios simulations (both Rust and Haskell) can be configured using YAML configuration files. The configuration schema is defined in [data/simulation/config.d.ts](data/simulation/config.d.ts) and the default configuration is available in [data/simulation/config.default.yaml](data/simulation/config.default.yaml).
+- **Transparency to ensure acceptance**  
 
-Each parameter controls a specific aspect of the simulation, and some parameters are only supported by either the Rust or Haskell implementation:
+  For decentralized governance to flourish, transparency must be at the core of everything we do. Sharing decisions, rationale, data, and results openly not only builds credibility but also empowers the community to participate meaningfully in governance. Clear communication and openness transform stakeholders into active collaborators, ensuring broad acceptance of Leios as a foundation for Cardano’s future.  
 
-### Simulation Configuration
+### Key Performance Indicators (KPIs)  
 
-| Parameter | Description | Haskell | Rust |
-|-----------|-------------|:-------:|:----:|
-| `relay-strategy` | Strategy for relaying blocks | ✅ | ✅ |
-| `tcp-congestion-control` | Enable TCP congestion control | ✅ | ❌ |
-| `multiplex-mini-protocols` | Enable multiplexing of mini-protocols | ✅ | ❌ |
-| `simulate-transactions` | Enable transaction simulation | ❌ | ✅ |
-| `treat-blocks-as-full` | Calculate delays and message sizes as if blocks were full | ✅ | ❌ |
-| `cleanup-policies` | Policies for cleaning up expired data | ✅ | ❌ |
+To measure the success of Leios and ensure alignment with our mission, we will track a set of technically rigorous KPIs across performance, efficiency, security, adoption, cost, and scalability. These indicators provide objective evidence of improvements and maintain transparency with the Cardano community, developers, and stakeholders.  
 
-### Leios Protocol Configuration
+#### Throughput and Performance  
 
-| Parameter | Description | Haskell | Rust |
-|-----------|-------------|:-------:|:----:|
-| `leios-stage-length-slots` | Number of slots in a Leios stage | ✅ | ✅ |
-| `leios-stage-active-voting-slots` | Number of slots for active voting | ✅ | ✅ |
-| `leios-vote-send-recv-stages` | Whether to separate Vote Send and Vote Receive stages | ✅ | ❌ |
+- **Transaction Data Throughput (TxB/s):** The volume of transaction data (in bytes) successfully processed and added to the ledger per second. This metric provides a more accurate measure of system capacity than raw TPS, as Cardano’s eUTXO model allows transactions to vary in complexity and size.  
 
-### Transaction Configuration
+- **Script Throughput:** The aggregate amount of computation performed on transactions, measured by total script execution units processed per second.  
+- **Inclusion Latency:** Average time for a transaction to be included in the ledger under both high-demand and low-demand conditions.  
 
-| Parameter | Description | Haskell | Rust |
-|-----------|-------------|:-------:|:----:|
-| `tx-generation-distribution` | Distribution for transaction generation | ❌ | ✅ |
-| `tx-size-bytes-distribution` | Distribution for transaction sizes | ❌ | ✅ |
-| `tx-validation-cpu-time-ms` | CPU time for transaction validation | ❌ | ✅ |
-| `tx-max-size-bytes` | Maximum transaction size | ❌ | ✅ |
+- **Block Propagation Time:** Duration required for new blocks to be propagated across the network.  
 
-### Ranking Block Configuration
+- **Transaction Finalization Time:** Time until transactions are considered finalized and economically irreversible.  
 
-| Parameter | Description | Haskell | Rust |
-|-----------|-------------|:-------:|:----:|
-| `rb-generation-probability` | Probability of generating a ranking block | ✅ | ✅ |
-| `rb-generation-cpu-time-ms` | CPU time for generating a ranking block | ✅ | ✅ |
-| `rb-head-validation-cpu-time-ms` | CPU time for validating a ranking block header | ✅ | ✅ |
-| `rb-head-size-bytes` | Size of a ranking block header | ✅ | ✅ |
-| `rb-body-max-size-bytes` | Maximum size of a ranking block body | ✅ | ✅ |
-| `rb-body-legacy-praos-payload-validation-cpu-time-ms-constant` | Constant CPU time for validating legacy Praos payload | ✅ | ✅ |
-| `rb-body-legacy-praos-payload-validation-cpu-time-ms-per-byte` | Per-byte CPU time for validating legacy Praos payload | ✅ | ✅ |
-| `rb-body-legacy-praos-payload-avg-size-bytes` | Average size of legacy Praos payload | ✅ | ❌ |
+#### Network Efficiency  
+- **Resource Utilization:** Reduction in computational and bandwidth overhead per transaction.  
 
-### Input Block Configuration
+- **Synchronization Speed:** Time required for a new node to fully synchronize with the current blockchain state.  
 
-| Parameter | Description | Haskell | Rust |
-|-----------|-------------|:-------:|:----:|
-| `ib-generation-probability` | Probability of generating an input block | ✅ | ✅ |
-| `ib-generation-cpu-time-ms` | CPU time for generating an input block | ✅ | ✅ |
-| `ib-shards` | Number of shards for input blocks | ❌ | ✅ |
-| `ib-head-size-bytes` | Size of an input block header | ✅ | ✅ |
-| `ib-head-validation-cpu-time-ms` | CPU time for validating an input block header | ✅ | ✅ |
-| `ib-body-validation-cpu-time-ms-constant` | Constant CPU time for validating an input block body | ✅ | ✅ |
-| `ib-body-validation-cpu-time-ms-per-byte` | Per-byte CPU time for validating an input block body | ✅ | ✅ |
-| `ib-body-avg-size-bytes` | Average size of an input block body | ✅ | ❌ |
-| `ib-body-max-size-bytes` | Maximum size of an input block body | ❌ | ✅ |
-| `ib-diffusion-strategy` | Strategy for diffusing input blocks | ✅ | ✅ |
-| `ib-diffusion-max-window-size` | Maximum window size for input block diffusion | ✅ | ❌ |
-| `ib-diffusion-max-headers-to-request` | Maximum number of headers to request for input blocks | ✅ | ❌ |
-| `ib-diffusion-max-bodies-to-request` | Maximum number of bodies to request for input blocks | ✅ | ❌ |
+- **Endorser Efficiency:** Percentage of transactions endorsed prior to block inclusion.  
 
-### Endorsement Block Configuration
+#### Security and Decentralization  
 
-| Parameter | Description | Haskell | Rust |
-|-----------|-------------|:-------:|:----:|
-| `eb-generation-probability` | Probability of generating an endorsement block | ✅ | ✅ |
-| `eb-generation-cpu-time-ms` | CPU time for generating an endorsement block | ✅ | ✅ |
-| `eb-validation-cpu-time-ms` | CPU time for validating an endorsement block | ✅ | ✅ |
-| `eb-size-bytes-constant` | Constant size of an endorsement block | ✅ | ✅ |
-| `eb-size-bytes-per-ib` | Per-input-block size of an endorsement block | ✅ | ✅ |
-| `eb-diffusion-strategy` | Strategy for diffusing endorsement blocks | ✅ | ❌ |
-| `eb-diffusion-max-window-size` | Maximum window size for endorsement block diffusion | ✅ | ❌ |
-| `eb-diffusion-max-headers-to-request` | Maximum number of headers to request for endorsement blocks | ✅ | ❌ |
-| `eb-diffusion-max-bodies-to-request` | Maximum number of bodies to request for endorsement blocks | ✅ | ❌ |
+- **Network Participation:** Number of active nodes engaged in endorsement and block production.  
 
-### Vote Configuration
+- **Consensus Integrity:** Preservation of Ouroboros Praos/Genesis-level security guarantees.  
 
-| Parameter | Description | Haskell | Rust |
-|-----------|-------------|:-------:|:----:|
-| `vote-generation-probability` | Probability of generating a vote | ✅ | ✅ |
-| `vote-generation-cpu-time-ms-constant` | Constant CPU time for generating a vote | ✅ | ✅ |
-| `vote-generation-cpu-time-ms-per-ib` | Per-input-block CPU time for generating a vote | ✅ | ✅ |
-| `vote-validation-cpu-time-ms` | CPU time for validating a vote | ✅ | ✅ |
-| `vote-threshold` | Threshold for vote acceptance | ✅ | ✅ |
-| `vote-bundle-size-bytes-constant` | Constant size of a vote bundle | ✅ | ✅ |
-| `vote-bundle-size-bytes-per-eb` | Per-endorsement-block size of a vote bundle | ✅ | ✅ |
-| `vote-diffusion-strategy` | Strategy for diffusing votes | ✅ | ❌ |
-| `vote-diffusion-max-window-size` | Maximum window size for vote diffusion | ✅ | ❌ |
-| `vote-diffusion-max-headers-to-request` | Maximum number of headers to request for votes | ✅ | ❌ |
-| `vote-diffusion-max-bodies-to-request` | Maximum number of bodies to request for votes | ✅ | ❌ |
+- **Resistance to Attacks:** Absence of vulnerabilities that could compromise availability, consistency, or safety.  
 
-### Certificate Configuration
+#### User and Developer Adoption  
 
-| Parameter | Description | Haskell | Rust |
-|-----------|-------------|:-------:|:----:|
-| `cert-generation-cpu-time-ms-constant` | Constant CPU time for generating a certificate | ✅ | ✅ |
-| `cert-generation-cpu-time-ms-per-node` | Per-node CPU time for generating a certificate | ✅ | ✅ |
-| `cert-validation-cpu-time-ms-constant` | Constant CPU time for validating a certificate | ✅ | ✅ |
-| `cert-validation-cpu-time-ms-per-node` | Per-node CPU time for validating a certificate | ✅ | ✅ |
-| `cert-size-bytes-constant` | Constant size of a certificate | ✅ | ✅ |
-| `cert-size-bytes-per-node` | Per-node size of a certificate | ✅ | ✅ |
+- **Wallet and DApp Integration:** Number of wallets and decentralized applications integrated with Leios.  
 
-For more details on each parameter, refer to the comments in the [config.d.ts](data/simulation/config.d.ts) file and the default values in [config.default.yaml](data/simulation/config.default.yaml).
+- **User Experience Feedback:** Decrease in complaints regarding transaction delays or network congestion. 
 
-## Specification
+- **Stake Pool Adoption:** Percentage of stake pools adopting Leios for transaction processing.  
 
-The formal specification of the Leios protocol in Agda is referenced from the repository: https://github.com/input-output-hk/ouroboros-leios-formal-spec
+#### Economic and Cost Efficiency  
 
-## Docker Simulation
+- **Transaction Fee Variability:** Stability or reduction of transaction fees under varying network load.  
 
-You can run both the Rust and Haskell simulations using Docker to generate simulation trace logs.
+- **Smart Contract Execution Costs:** Lower average consumption of execution units per Plutus script.  
 
-### Building the Docker Images
+- **Sustainability:** Ability to keep node infrastructure costs balanced relative to on-chain revenues.  
 
-```bash
-# Build the Rust simulation image
-docker build --target rs -t ouroboros-leios/sim-rs:latest -f Dockerfile .
+#### Scalability and Future-Proofing  
 
-# Build the Haskell simulation image
-docker build --target hs -t ouroboros-leios/sim-hs:latest -f Dockerfile .
-```
+- **Capacity for Future Growth:** Ability to maintain low-latency, high-throughput performance as transaction demand rises. 
+ 
+- **Protocol Upgrade Success:** Seamless integration of Leios with existing Cardano infrastructure and tooling without causing network fragmentation.  
+ 
 
-### Running the Rust Simulation
+## Objectives
 
-The Rust simulation generates JSONL trace files that can be visualized using the web-based UI:
+As also mentioned in the [introduction](./overview.md), Leios is about maturing
+a consensus protocol design from a research paper through multiple [software
+readiness
+levels](https://committees.docs.intersectmbo.org/intersect-technical-steering-committee/technical-roadmap/project-cards-explained/software-readiness-level)
+and ultimately deploy it as a consensus upgrade onto the Cardano network.
 
-#### Basic Usage (Default Settings)
-```bash
-# Run with default settings
-docker run -v $(pwd)/output:/output ouroboros-leios/sim-rs:latest
-```
+Following our strategy outlined above, we identified several key objectives
+along the way which are roughly in order, but not strictly sequential. Instead,
+each will give rise to a list of _marketable features_, which we going to
+identify, progress and deliver throughout the whole lifecycle of this project.
+These objectives and features make up the actual product roadmap, which we are
+going to update and report on every month via [this github
+project](https://github.com/orgs/input-output-hk/projects/167).
 
-#### Specifying Output File
-```bash
-# Run with custom output file location
-docker run -v $(pwd)/output:/output ouroboros-leios/sim-rs:latest /output/simulation.jsonl
-```
+<!-- TODO: go into more detail on why each objective is important and also what's in scope -->
 
-#### Using Custom Topology and Config Files
-```bash
-# Mount your config directory and use custom files
-docker run \
-  -v $(pwd)/output:/output \
-  -v $(pwd)/data/simulation:/config \
-  ouroboros-leios/sim-rs:latest /config/topology-dense-52.yaml /output/simulation.jsonl -s 20 -p /config/config.default.yaml
-```
+### Improvement Proposal (CIP)
 
-Common arguments for Rust simulation:
-- `-s NUMBER`: Number of slots to simulate
-- `-p PATH`: Path to custom parameters file
-- `--trace-node NODE_ID`: Enable tracing for specific node
-- `--timescale SCALE`: Adjust simulation speed (e.g., 16 for 16x faster)
+> As the Cardano community, we want to learn as early as possible about what is proposed to change, so that it can be discussed across various groups and committees, and referenced in later on-chain governance.
 
-### Running the Haskell Simulation
+Create a Cardano Improvement Proposal (CIP) that addresses the [Cardano Problem Statement (CPS) about Greater Transaction Throughput (CPS-18)](https://github.com/cardano-scaling/CIPs/blob/master/CPS-0018/README.md). The proposed protocol design shall be applicable to Cardano and feasibility is proven by relevant analysis and simulations.
 
-The Haskell simulation generates log files with simulation data:
+### Technical specification
 
-#### Basic Usage (Default Settings)
-```bash
-# Run with default settings (40 seconds)
-docker run -v $(pwd)/output:/output ouroboros-leios/sim-hs:latest
-```
+> As a node developer, I want to understand in detail how the Leios protocol works and whether my node implementation is correct.
 
-#### Custom Duration and Output File
-```bash
-# Run for 120 seconds with specific output file
-docker run -v $(pwd)/output:/output ouroboros-leios/sim-hs:latest \
-    --output-seconds 120 \
-    --output-file /output/my-simulation.log
-```
+Create design documents, formal specifications and conformance test suites usable by developers of all relevant Cardano node implementations.
 
-#### Using Custom Configuration
-```bash
-# Run with custom topology and config files
-docker run \
-    -v $(pwd)/output:/output \
-    -v $(pwd)/data/simulation:/config \
-    ouroboros-leios/sim-hs:latest \
-    --topology /config/topology-dense-52.yaml \
-    --config /config/config.default.yaml \
-    --output-seconds 60 \
-    --seed 12345
-```
+### Showcase 1k TPS
 
-Common arguments for Haskell simulation:
-- `--output-seconds NUMBER`: Duration of simulation in seconds (default: 40)
-- `--seed NUMBER`: Random seed for reproducible runs
-- `--topology PATH`: Custom topology file
-- `--config PATH`: Custom configuration file
-- `--output-file PATH`: Custom output file location
+> As a potential builder, I want to experience the capability of the proposed consensus upgrade and be convinced that it is as secure as claimed.
 
-> [!NOTE]
-> The Rust simulation generates JSONL trace files that can be visualized using the web-based UI in the `ui` directory.
-> The Haskell simulation generates log files in its own format.
-> 
-> To visualize Rust simulation traces:
-> 1. Generate a trace file using the Rust simulation
-> 2. Use the web UI in the `ui` directory to load and visualize the trace
->
-> For Haskell simulation visualization, use the `viz` command option directly in the Haskell simulation binary (not available in Docker).
+Demonstrate 200 TkB/s in a controlled environment using a network prototype, but also validate any assumptions and threat mitigations.
 
-## Archive
+### Leios testnet
 
-The [Leios CIP](https://github.com/cardano-foundation/CIPs/pull/379)
-initially proposed in November 2022, yielded the following
-content. While the material there is still relevant and useful, it
-won't be updated in the future.
+> As an SPO and Cardano developer, we want a dedicated network for testing and measuring the perfomance of Leios, so that we can update relevant infrastructure and ensure it can handle increased throughput reliably without compromising security.
 
-- `report`: the LaTeX source for the design report
-- `CIP`: the initial version of the Leios CIP
-- `simulation`: simulation and visualisation code for investigating Leios-like network traffic patterns.
+A larger scale public network that can be used to validate parameter selection, continuous load tests and allow everyone to integrate with Leios changes.
+
+### Hard fork
+
+> As an SPO and dRep, we want to have a mature Cardano node implementation that enables Leios and have it made available to all users of Cardano.
+
+Create a `cardano-node` release candidate and mature the feature set through `preview`, `preprod` and eventually enable it with a hard-fork on `mainnet`.
